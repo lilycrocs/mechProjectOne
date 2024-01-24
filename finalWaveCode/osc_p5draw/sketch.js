@@ -9,11 +9,33 @@ var notes = ["03C" , "03D" , "03E" , "03G" , "04A" , "04C"]; // array of note va
 var host = '127.0.0.1:8080'; // address of the websockets server
 var socket; // the websocket connection
 
+let currentColor;
+let targetColor;
+
 function setup() {
     // connect to server...
     socket = new WebSocket('ws://' + host);
     socket.onopen = openHandler;
     socket.onmessage = messageHandler;
+    // set up background 
+    createCanvas(1500, 750);
+    currentColor = color(random(255), random(255), random(255));
+    targetColor = color(random(255), random(255), random(255));
+}
+
+function draw() {
+  // gradual transition between current color and target color
+  currentColor = lerpColor(currentColor, targetColor, 0.01);
+
+  // background color
+  background(currentColor);
+
+  // update targetColor every few frames
+  if (frameCount % 120 == 0) {
+    targetColor = color(random(255), random(255), random(255));
+  }
+
+  // Draw other elements or shapes here if needed
 }
 
 function openHandler() {
