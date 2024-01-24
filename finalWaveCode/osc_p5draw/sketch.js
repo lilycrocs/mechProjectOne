@@ -9,8 +9,8 @@ var notes = ["03C" , "03D" , "03E" , "03G" , "04A" , "04C"]; // array of note va
 var host = '127.0.0.1:8080'; // address of the websockets server
 var socket; // the websocket connection
 
-let currentColor;
-let targetColor;
+// let currentColor;
+// let targetColor;
 
 function setup() {
     // connect to server...
@@ -19,24 +19,23 @@ function setup() {
     socket.onmessage = messageHandler;
     // set up background 
     createCanvas(1500, 750);
-    currentColor = color(random(255), random(255), random(255));
-    targetColor = color(random(255), random(255), random(255));
+    // currentColor = color(random(255), random(255), random(255));
+    // targetColor = color(random(255), random(255), random(255));
 }
 
-function draw() {
-  // gradual transition between current color and target color
-  currentColor = lerpColor(currentColor, targetColor, 0.01);
+// function draw() {
+//   // gradual transition between current color and target color
+//   currentColor = lerpColor(currentColor, targetColor, 0.01);
 
-  // background color
-  background(currentColor);
+//   // background color
+//   background(currentColor);
 
-  // update targetColor every few frames
-  if (frameCount % 120 == 0) {
-    targetColor = color(random(255), random(255), random(255));
-  }
+//   // update targetColor every few frames
+//   if (frameCount % 120 == 0) {
+//     targetColor = color(random(255), random(255), random(255));
+//   }
 
-  // Draw other elements or shapes here if needed
-}
+// }
 
 function openHandler() {
     console.log("Connected to socket server at " + host);
@@ -49,6 +48,23 @@ function messageHandler(event) {
     console.log(note);
     playNote(note);
 }
+
+function draw() {
+    // Set background color based on note being received
+    if (note = "03C") {
+      background('#f74a5c'); // red for 03C
+    } else if (note == "03D") {
+      background('#f7b54a'); // orange for 03D
+    } else if (note == "03E") {
+      background('#f7e04a'); // yellow for 03E
+    } else if (note == "03G") {
+      background('#4af75c'); // green for 03G
+    } else if (note == "04A") {
+      background('#4ae6f7'); // blue for 04A
+    } else if (note == "04B") {
+      background('#a74af7'); // purple for 04B
+    }
+  }
 
 function playNote(note) {
 
