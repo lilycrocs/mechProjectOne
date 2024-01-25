@@ -64,6 +64,8 @@ function draw() {
       background('#4ae6f7'); // blue for 04A
     } else if (note == "04B") {
       background('#a74af7'); // purple for 04B
+    } else {
+      background('#ffffff'); // white
     }
   }
 
