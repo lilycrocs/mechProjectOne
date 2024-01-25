@@ -8,6 +8,7 @@ var notes = ["03C" , "03D" , "03E" , "03G" , "04A" , "04C"]; // array of note va
     // to assign wave height values to and then send to pilot
 var host = '127.0.0.1:8080'; // address of the websockets server
 var socket; // the websocket connection
+var note; // sets up note variable so it can be used outside of message handler
 
 // let currentColor;
 // let targetColor;
@@ -44,14 +45,14 @@ function openHandler() {
 function messageHandler(event) {
     var msg = event.data; // read data from the onmessage event
     //waveHeights = msg; // puts osc message in wave number variable
-    var note = notes[int(msg*6)] // converts received message to a note value
+    note = notes[int(msg*6)] // converts received message to a note value
     console.log(note);
     playNote(note);
 }
 
 function draw() {
     // Set background color based on note being received
-    if (note = "03C") {
+    if (note == "03C") {
       background('#f74a5c'); // red for 03C
     } else if (note == "03D") {
       background('#f7b54a'); // orange for 03D
